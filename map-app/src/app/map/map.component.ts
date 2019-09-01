@@ -86,11 +86,11 @@ export class MapComponent implements OnInit {
       center: [this.lng, this.lat]
     });
 
-    this.map.on('load', () => {
-      this.toggleableLayerIdsList.forEach((layer) => {
-        this.map.setLayoutProperty(layer.id, 'visibility', 'none');
-      });
-    });
+    // this.map.on('load', () => {
+    //   this.toggleableLayerIdsList.forEach((layer) => {
+    //     this.map.setLayoutProperty(layer.id, 'visibility', 'none');
+    //   });
+    // });
 
     // this.map.on('click', 'dominica-damage-buildings', (e) => {
     //   new mapboxgl.Popup()
@@ -116,7 +116,7 @@ export class MapComponent implements OnInit {
       if (this.currentSceneIndex < this.scenes.length - 1) {
         this.currentSceneIndex += 1;
         setTimeout(() => this.updateFlag = true, 1);
-        this.setCurrentLayer();
+        // this.setCurrentLayer();
         this.setZoomExtent();
         if (this.currentSceneIndex === this.scenes.length - 1) {
           this.nextDisabled = true;
@@ -129,7 +129,7 @@ export class MapComponent implements OnInit {
         this.nextDisabled = false;
         this.currentSceneIndex -= 1;
         setTimeout(() => this.updateFlag = true, 1);
-        this.setCurrentLayer();
+        // this.setCurrentLayer();
         this.setZoomExtent();
         if (this.currentSceneIndex > 0) {
           this.prevDisabled = false;
@@ -142,16 +142,16 @@ export class MapComponent implements OnInit {
     this.scrollCardContentToTop();
   }
 
-  setCurrentLayer() {
-    this.toggleableLayerIdsList.forEach((layer) => {
-      this.map.setLayoutProperty(layer.id, 'visibility', 'none');
-    });
-
-    this.scenes[this.currentSceneIndex].visibleLayer.forEach((layer) => {
-      this.toggleLayer(layer);
-      this.setZoomExtent();
-    });
-  }
+  // setCurrentLayer() {
+  //   this.toggleableLayerIdsList.forEach((layer) => {
+  //     this.map.setLayoutProperty(layer.id, 'visibility', 'none');
+  //   });
+  // 
+  //   this.scenes[this.currentSceneIndex].visibleLayer.forEach((layer) => {
+  //     this.toggleLayer(layer);
+  //     this.setZoomExtent();
+  //   });
+  // }
 
   setZoomExtent() {
     this.map.setCenter(this.scenes[this.currentSceneIndex].center);
