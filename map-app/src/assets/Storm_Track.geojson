@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Storm Track",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Complete Track", "description": null, "tessellate": 1, "visibility": 1 }, "geometry": { "type": "LineString", "coordinates": [ [ -50.5, 12.2 ], [ -52.6, 12.3 ], [ -53.7, 12.5 ], [ -54.9, 13.0 ], [ -56.2, 13.5 ], [ -57.5, 13.8 ], [ -58.4, 14.2 ], [ -59.5, 14.6 ], [ -60.1, 14.7 ], [ -60.7, 15.1 ], [ -61.1, 15.3 ], [ -61.4, 15.5 ], [ -62.3, 16.0 ], [ -63.1, 16.3 ], [ -64.0, 16.8 ], [ -64.7, 17.3 ], [ -65.6, 17.9 ], [ -66.5, 18.4 ], [ -67.3, 18.8 ], [ -67.9, 19.2 ], [ -68.4, 19.6 ] ] } }
+]
+}

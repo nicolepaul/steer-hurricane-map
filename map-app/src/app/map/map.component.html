@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutAlign="start" fxLayout.lt-md="column-reverse">
+  <div fxLayout="column" fxLayoutAlign="space-between" class="overlay" style="white-space: pre-line">
+    <div #contentRef class="content">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{displayScene('title')}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{displayScene('info')}}</p>
+
+          <ul>
+            <li *ngFor="let attribution of scenes[currentSceneIndex].attribution">
+              <a
+              class="attribution"
+              href="{{attribution.link}}">
+                {{attribution.label}}
+              </a>
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="navigation" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button
+        [disabled]="prevDisabled"
+        class="button"
+        (click)="changeScene('prev')">prev
+      </button>
+      <button mat-raised-button
+        class="button"
+        [disabled]="nextDisabled"
+        (click)="changeScene('next')">next
+      </button>
+    </div>
+  </div>
+  <div class="map" id="map" class="match-parent"></div>
+
+</div>
+<app-map-legend
+  class="legend"
+  *ngIf="scenes[currentSceneIndex].legend.exists"
+  [colors]="scenes[currentSceneIndex].legend.colors"
+  [labels]="scenes[currentSceneIndex].legend.labels">
+</app-map-legend>
