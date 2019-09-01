@@ -17,18 +17,6 @@ theme(Highcharts);
 
 export class MapComponent implements OnInit {
   public contentRef!: ElementRef;
-  Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {
-    series: [{
-      data: [1, 2, 3],
-      type: 'column'
-    }],
-    chart: {
-      style: {
-        fontFamily: 'Helvetica '
-      }
-    }
-  };
   updateFlag = true;
   map: mapboxgl.Map;
   style = 'mapbox://styles/nicolepaul/ck01bpvb038vp1cptlb7449yl';
@@ -45,13 +33,13 @@ export class MapComponent implements OnInit {
         link: 'https://www.google.com',
         label: `attribution goes here`
       }],
-      visibleLayer: ['indianriver-parcel'],
-      zoom: 4.5,
+      visibleLayer: ['indianriver-parcel', 'martin-parcel', 'stlucie-parcel', 'volusia-parcel', 'brevard-parcel'],
+      zoom: 6,
       center: { lon: -80.172568, lat: 25.774210 },
       legend: {
-        exists: false,
-        // colors: ['#666666', '#3cb371', '#ffd700', '#ff8c00', '#dc143c'],
-        // labels: ['Unknown damage', 'Negligible to slight damage', 'Moderately damaged', 'Highly damaged', 'Completely destroyed']
+        exists: true,
+        colors: ['#9e0142', '#9e070c', '#9f410e', '#9f7a14', '#909f1b', '#60a021', '#36a028', '#2ea04c', '#35a17b', '#3b9ea1', '#427aa1', '#485aa2', '#666666'],
+        labels: ['1900-1909', '1910-1919', '1920-1929', '1930-1939', '1940-1949','1950-1959', '1960-1969', '1970-1979', '1980-1989', '1990-1999', '2000-2009', '2010-2019', 'Unknown year built']
       }
     },
   ];
@@ -64,6 +52,26 @@ export class MapComponent implements OnInit {
       id: 'indianriver-parcel',
       displayName: 'Indian River',
       checked: false
+    },
+    {
+      id: 'martin-parcel',
+      displayName: 'Martin',
+      checked: false
+    },
+    {
+      id: 'volusia-parcel',
+      displayName: 'Volusia',
+      checked: false
+    },
+    {
+      id: 'brevard-parcel',
+      displayName: 'Brevard',
+      checked: false
+    },
+    {
+      id: 'stlucie-parcel',
+      displayName: 'St Lucie',
+      checked: false
     }];
 
   constructor() { }
@@ -74,8 +82,7 @@ export class MapComponent implements OnInit {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: this.style,
-      zoom: 4.5,
-      // minZoom: 4,
+      zoom: 6,
       center: [this.lng, this.lat]
     });
 
