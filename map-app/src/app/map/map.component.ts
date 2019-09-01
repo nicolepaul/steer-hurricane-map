@@ -39,7 +39,7 @@ export class MapComponent implements OnInit {
       legend: {
         exists: true,
         colors: ['#9e0142', '#9e070c', '#9f410e', '#9f7a14', '#909f1b', '#60a021', '#36a028', '#2ea04c', '#35a17b', '#3b9ea1', '#427aa1', '#485aa2', '#666666'],
-        labels: ['1900-1909', '1910-1919', '1920-1929', '1930-1939', '1940-1949','1950-1959', '1960-1969', '1970-1979', '1980-1989', '1990-1999', '2000-2009', '2010-2019', 'Unknown year built']
+        labels: ['1900-1909', '1910-1919', '1920-1929', '1930-1939', '1940-1949', '1950-1959', '1960-1969', '1970-1979', '1980-1989', '1990-1999', '2000-2009', '2010-2019', 'Unknown year built']
       }
     },
   ];
@@ -86,11 +86,21 @@ export class MapComponent implements OnInit {
       center: [this.lng, this.lat]
     });
 
-    // this.map.on('load', () => {
-    //   this.toggleableLayerIdsList.forEach((layer) => {
-    //     this.map.setLayoutProperty(layer.id, 'visibility', 'none');
-    //   });
-    // });
+
+    this.map.on('load', () => {
+      this.map.addLayer({
+        'id': 'wms-test-layer',
+        'type': 'raster',
+        'source': {
+          'type': 'raster',
+          'tiles': [
+            'https://nowcoast.noaa.gov/arcgis/services/nowcoast/radar_meteo_imagery_nexrad_time/MapServer/WmsServer?bbox={bbox-epsg-3857}&service=WMS&request=GetMap&version=1.3.0&layers=1&styles=&format=image/png&transparent=true&height=256&width=256&crs=EPSG:3857'
+          ],
+          'tileSize': 256
+        },
+        'paint': {}
+      });
+    });
 
     // this.map.on('click', 'dominica-damage-buildings', (e) => {
     //   new mapboxgl.Popup()
@@ -146,7 +156,7 @@ export class MapComponent implements OnInit {
   //   this.toggleableLayerIdsList.forEach((layer) => {
   //     this.map.setLayoutProperty(layer.id, 'visibility', 'none');
   //   });
-  // 
+  //
   //   this.scenes[this.currentSceneIndex].visibleLayer.forEach((layer) => {
   //     this.toggleLayer(layer);
   //     this.setZoomExtent();
