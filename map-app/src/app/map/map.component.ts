@@ -87,9 +87,60 @@ export class MapComponent implements OnInit {
     });
 
 
+    // var url = 'https://wanderdrone.appspot.com/';
+
     this.map.on('load', () => {
+
       this.map.addLayer({
-        'id': 'wms-test-layer',
+        "id": "tc-observed-surface-wind-swath",
+        "type": "fill",
+        "source": {
+          "type": "geojson",
+          "data": "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/wwa_meteocean_tropicalcyclones_trackintensityfcsts_time/MapServer/10/query?where=1%3D1&outSR=4326&f=geojson"
+        },
+        "paint": {
+          "fill-color": "#eeeeee",
+          "fill-opacity": 0.1
+        }
+      }),
+
+        this.map.addLayer({
+          "id": "tc-observed-center-positions",
+          "type": "symbol",
+          "source": {
+            "type": "geojson",
+            "data": "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/wwa_meteocean_tropicalcyclones_trackintensityfcsts_time/MapServer/8/query?where=1%3D1&outSR=4326&f=geojson"
+          },
+          "layout": {
+            "icon-image": "weather-hurricane"
+          },
+          "paint": {
+            "icon-color": "#eeeeee"
+          }
+        })
+
+      // THIS IS SAMPLE CODE FOR OVERLAYING EXTERNAL GEOJSON
+      // this.map.addLayer({
+      //   "id": "some id",
+      //   "type": "symbol",
+      //   "source": {
+      //     "type": "geojson",
+      //     "data": "https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson"
+      //   },
+      //   "layout": {
+      //     "icon-image": "harbor-15",
+      //     "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+      //     "text-offset": [0, 0.6],
+      //     "text-anchor": "top"
+      //   }
+      // })
+
+
+
+
+      // THIS IS SAMPLE CODE FOR OVERLAYING ETERNAL RASTER
+      this.map.addLayer({
+        'id': 'wms-imagery-layer',
         'type': 'raster',
         'source': {
           'type': 'raster',
@@ -98,17 +149,22 @@ export class MapComponent implements OnInit {
           ],
           'tileSize': 256
         },
-        'paint': {}
+        'paint': {
+          'raster-opacity': 0.2
+        }
       });
-    });
 
-    // this.map.on('click', 'dominica-damage-buildings', (e) => {
-    //   new mapboxgl.Popup()
-    //     .setLngLat(e.lngLat)
-    //     .setHTML(e.features[0].properties.agency_id)
-    //     .addTo(this.map);
-    // });
+      // THIS IS SAMPLE CODE FOR A POPUP MENU ON CLICK
+      // this.map.on('click', 'dominica-damage-buildings', (e) => {
+      //   new mapboxgl.Popup()
+      //     .setLngLat(e.lngLat)
+      //     .setHTML(e.features[0].properties.agency_id)
+      //     .addTo(this.map);
+      // });
+
+    });
   }
+
 
   toggleLayer(layer: any) {
     if (this.map.getLayoutProperty(layer, 'visibility') === 'visible') {
